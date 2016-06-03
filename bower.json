@@ -1,0 +1,17 @@
+{
+  "name": "kostis-website",
+  "description": "A personal website for AngularJS",
+  "version": "0.0.0",
+  "homepage": "https://",
+  "license": "tsafou",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-loader": "~1.5.0",
+    "angular-material": null,
+    "angular-ui-router": null,
+    "angular-messages": null,
+    "angular-aria": null,
+    "angular-animate": null
+  }
+}
