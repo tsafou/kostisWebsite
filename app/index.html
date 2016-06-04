@@ -1,24 +1,96 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>
+<html lang="en" ng-app="kostisWebsite" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="kostisWebsite" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="kostisWebsite" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="kostisWebsite" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Kostis Personal Website</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="app.css">
 </head>
-<body>
+<body layout="column" ng-controller="mainController as mainCtrl">
+
+<md-toolbar layout="row" layout-align="start center">
+    <md-button ng-click="mainCtrl.openSidebar()">
+        <ng-md-icon icon="menu" style="fill: white"></ng-md-icon>
+    </md-button>
+    <div layout="row" hide-xs>
+        <md-button style="width:100%;" ng-repeat="item in mainCtrl.menuItems" ui-sref="{{item.url}}"
+                   ui-sref-active="active">{{item.name}}
+        </md-button>
+    </div>
+    <div hide-gt-xs>
+        tsafou's website
+    </div>
+</md-toolbar>
+
+<div flex layout="row">
+    <md-sidenav class="md-sidenav-left"
+                md-component-id="left"
+                md-is-locked-open="$mdMedia('gt-md')"
+                md-whiteframe="4">
+        <md-toolbar layout="row">
+            <md-button ng-click="mainCtrl.closeSidebar()" class="md-icon-button">
+                <ng-md-icon icon="menu" style="fill: white"></ng-md-icon>
+            </md-button>
+            <span flex="20" hide-sm></span>
+            <p flex="60" style="text-align: center;">Menu</p>
+            <span flex="20"></span>
+        </md-toolbar>
+        <div layout="column" layout-align="center center">
+            <img src="assets/img/me.jpg" class="profile-pic"/>
+            <p layout="column" layout-align="center center">
+                <span>Kostis Tsafaris</span>
+                <span>Developer</span>
+            </p>
+            <md-button style="width:100%;" ng-repeat="item in mainCtrl.menuItems" ui-sref="{{item.url}}"
+                       ui-sref-active="active" ng-click="mainCtrl.closeSidebar()">{{item.name}}
+            </md-button>
+        </div>
+    </md-sidenav>
 
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="app.js"></script>
+    <!-- MAIN CONTENT -->
+    <div flex class="background-main" layout="column" layout-align="center center">
+
+        <md-button ng-click="mainCtrl.openSidebar()" class="show-menu" ng-if="mainCtrl.showMenuButton">
+            <ng-md-icon icon="menu" style="fill: white"></ng-md-icon>
+        </md-button>
+
+        <div ng-show="mainCtrl.init">
+            <md-button ng-show="mainCtrl.showStart" class="md-accent md-raised" ng-click="mainCtrl.startApp();">START
+            </md-button>
+            <p ng-show="!mainCtrl.showStart">{{(mainCtrl.countDown>0) ? mainCtrl.countDown: 'READY'}}</p>
+        </div>
+
+        <div ui-view ng-if="!mainCtrl.init"></div>
+
+    </div>
+
+</div>
+
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-loader/angular-loader.min.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.0/angular-material-icons.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="app.js"></script>
+<script src="main.controller.js"></script>
+<script src="components/home/js/home.controller.js"></script>
 </body>
 </html>

@@ -12,6 +12,7 @@
     "angular-ui-router": null,
     "angular-messages": null,
     "angular-aria": null,
-    "angular-animate": null
+    "angular-animate": null,
+    "angular-loading-bar": null
   }
 }
