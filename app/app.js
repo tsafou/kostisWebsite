@@ -6,7 +6,8 @@ angular.module('kostisWebsite', [
     'ngMaterial',
     'ngMdIcons',
     'ngAnimate',
-]).config(function ($stateProvider, $urlRouterProvider) {
+    'angularTypewrite'
+]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -15,24 +16,24 @@ angular.module('kostisWebsite', [
     // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl: 'partial-home.html',
+            templateUrl: 'components/home/tpl/partial-home.html',
             controller: 'homeController',
-            controllerAs: 'homeCtrl'
+            controllerAs: 'homeCtrl',
+            // views: {
+            //     "viewA": { templateUrl: "components/home/tpl/partial-home-list.html",
+            //         controller: function($scope) {
+            //             $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
+            //         }}
+            // }
         })
 
         // nested list with custom controller
         .state('home.list', {
             url: '/list',
-            templateUrl: 'partial-home-list.html',
+            templateUrl: 'components/home/tpl/partial-home-list.html',
             controller: function($scope) {
                 $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
             }
-        })
-
-        // nested list with just some random string data
-        .state('home.paragraph', {
-            url: '/paragraph',
-            template: 'I could sure use a drink right now.'
         })
 
         // ABOUT PAGE AND MULTIPLE NAMED VIEWS =================================
@@ -45,8 +46,16 @@ angular.module('kostisWebsite', [
 
         .state('skills', {
             url: '/skills',
-            templateUrl: 'partial-skills.html',
+            templateUrl: 'components/skills/tpl/partial-skills.html',
             // controller: 'aboutController',
             // controllerAs: 'aboutCtrl'
         });
+
+
+    /*Theming*/
+    $mdThemingProvider.theme('default')
+        .primaryPalette('grey')
+        .accentPalette('orange')
+        .backgroundPalette('grey').dark();
+
 });

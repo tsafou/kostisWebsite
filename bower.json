@@ -13,6 +13,7 @@
     "angular-messages": null,
     "angular-aria": null,
     "angular-animate": null,
-    "angular-loading-bar": null
+    "angular-loading-bar": null,
+    "angular-typewrite": "^0.0.14"
   }
 }

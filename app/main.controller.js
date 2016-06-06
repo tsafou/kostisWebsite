@@ -3,15 +3,16 @@
  */
 angular.module('kostisWebsite').controller('mainController', mainController);
 
-mainController.$inject = ['$mdSidenav', '$http', '$timeout', '$interval'];
+mainController.$inject = ['$mdSidenav', '$http', '$timeout', '$interval', '$location', '$anchorScroll', '$document'];
 
-function mainController($mdSidenav, $http, $timeout, $interval) {
+function mainController($mdSidenav, $http, $timeout, $interval, $location, $anchorScroll, $document) {
     var vm = this;
 
     vm.init = true;
     vm.sidenavIsOpen = false;
     vm.countDown = 3;
     vm.showStart = true;
+    vm.startTyping = false;
 
     vm.menuItems = [
         {
@@ -55,6 +56,15 @@ function mainController($mdSidenav, $http, $timeout, $interval) {
         vm.sidenavIsOpen = false;
         $mdSidenav('left').close();
     };
+
+    vm.scrollTo = function (id) {
+        $location.hash(id);
+        $anchorScroll();
+    };
+
+    $document.ready(function () {
+        vm.startTyping = true;
+    })
 
 
 }
