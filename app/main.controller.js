@@ -13,6 +13,8 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
     vm.countDown = 3;
     vm.showStart = true;
     vm.startTyping = false;
+    vm.initView = false;
+    vm.showSkills = false;
 
     vm.menuItems = [
         {
@@ -26,6 +28,36 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
         {
             "name": "Skills",
             "url": "skills"
+        }
+    ];
+
+    vm.skills1 = [
+        {
+            title: "HTML5",
+            description: "Blah",
+            icon: "fa-html5"
+        },
+        {
+            title: "CSS3",
+            description: "CSS is bla",
+            icon: "fa-css3"
+        }
+    ];
+    vm.skills2 = [
+        {
+            title: "Javascript",
+            description: "Javascript, AngularJS",
+            icon: "fa-css3"
+        },
+        {
+            title: "Database",
+            description: "mySQL",
+            icon: "fa-database"
+        },
+        {
+            title: "Something",
+            description: "else",
+            icon: "fa-database"
         }
     ];
 
@@ -64,7 +96,22 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
 
     $document.ready(function () {
         vm.startTyping = true;
-    })
+    });
 
+    vm.skillsInView = function (inview, event) {
+        // console.log('in view: ', inview, event.inViewTarget);
+        console.log(inview)
+        if (inview) {
+            $timeout(function () {
+                vm.showSkills = true
+            });
+        }
+        else {
+            $timeout(function () {
+                vm.showSkills = false;
+            });
+        }
+
+    }
 
 }

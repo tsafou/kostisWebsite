@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/angular-typewrite/dist/angular-typewrite.css">
+    <link rel="stylesheet" href="assets/animate/animate.css">
     <link rel="stylesheet" href="app.css">
 </head>
 <body ng-controller="mainController as mainCtrl" layout="row" class="docs-body">
@@ -45,10 +46,11 @@
 </md-sidenav>
 
 
-<md-content style="background: transparent;">
+<md-content class="main-container" in-view-container>
 
     <div class="background-main1">
-        <md-toolbar class="md-medium-tall" style="background: transparent;" layout="column" layout-align="center"> <!--md-scroll-shrink-->
+        <md-toolbar class="md-medium-tall" style="background: transparent;" layout="column" layout-align="center">
+            <!--md-scroll-shrink-->
             <div layout="row" layout-align="space-between center">
                 <div flex>
                     <md-button ng-click="mainCtrl.openSidebar()">
@@ -56,7 +58,7 @@
                     </md-button>
                 </div>
                 <!--<div flex class="text-center">-->
-                    <!--<pre typewrite start="mainCtrl.startTyping" blink-cursor="false" text="'Kostis Tsafaris - Web Developer'" initial-delay="0s" type-delay="250"></pre>-->
+                <!--<pre typewrite start="mainCtrl.startTyping" blink-cursor="false" text="'Kostis Tsafaris - Web Developer'" initial-delay="0s" type-delay="250"></pre>-->
                 <!--</div>-->
                 <div class="md-toolbar-tools" layout-align="center center" hide-xs>
                     <md-button ng-repeat="item in mainCtrl.menuItems" ui-sref="{{item.url}}"
@@ -77,49 +79,68 @@
             </ul>
         </div>
 
-        <div flex layout="column" layout-align="space-between center" style="height: calc( 100% - 88px);"> <!--subtract the height of the md-toolbar-->
+        <div flex layout="column" layout-align="space-between center" style="height: calc( 100% - 88px);">
+            <!--subtract the height of the md-toolbar-->
             <div></div>
             <h3 class="text-center">
-                <pre class="typewrite" typewrite start="mainCtrl.startTyping" blink-cursor="false" text="'Kostis Tsafaris'" initial-delay="0s" type-delay="250"></pre><br/>
-                <pre class="typewrite" typewrite start="mainCtrl.startTyping" text="'Web Developer'" initial-delay="4s" type-delay="250" blink-delay="500"></pre><br/>
+                <pre class="typewrite" typewrite start="mainCtrl.startTyping" blink-cursor="false"
+                     text="'Kostis Tsafaris'" initial-delay="0s" type-delay="250"></pre>
+                <br/>
+                <pre class="typewrite" typewrite start="mainCtrl.startTyping" text="'Web Developer'" initial-delay="4s"
+                     type-delay="250" blink-delay="500"></pre>
+                <br/>
             </h3>
             <md-button ng-click="mainCtrl.scrollTo('main2')"><h3>Start</h3></md-button>
         </div>
     </div>
 
-    <div id="main2" class="background-main2">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a rhoncus urna, non accumsan lacus. Donec
-            dapibus pellentesque lorem, ac porttitor purus dictum porta. Donec rhoncus varius enim id suscipit.
-            Vivamus
-            eget tempus urna. Duis finibus euismod suscipit. Curabitur bibendum, purus vitae tincidunt laoreet,
-            nulla
-            ante sagittis odio, quis sollicitudin dolor diam nec neque. Vestibulum nulla justo, elementum at nulla
-            sed,
-            porttitor sollicitudin lacus. In interdum interdum magna ac posuere. Donec placerat vestibulum orci, nec
-            ornare risus scelerisque nec. Donec id est ut nulla pretium tempor non eget nibh. Integer facilisis
-            mauris
-            tortor, non pellentesque massa fringilla quis.
-        </p>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a rhoncus urna, non accumsan lacus. Donec
-            dapibus pellentesque lorem, ac porttitor purus dictum porta. Donec rhoncus varius enim id suscipit.
-            Vivamus
-            eget tempus urna. Duis finibus euismod suscipit. Curabitur bibendum, purus vitae tincidunt laoreet,
-            nulla
-            ante sagittis odio, quis sollicitudin dolor diam nec neque. Vestibulum nulla justo, elementum at nulla
-            sed,
-            porttitor sollicitudin lacus. In interdum interdum magna ac posuere. Donec placerat vestibulum orci, nec
-            ornare risus scelerisque nec. Donec id est ut nulla pretium tempor non eget nibh. Integer facilisis
-            mauris
-            tortor, non pellentesque massa fringilla quis.
-        </p>
+    <div id="main2" class="background-main2" layout="row" layout-align="center center">
+        <div><img src="assets/img/meOutline.png" class="profile-pic img-circle"></div>
+        <div flex="5"></div>
+        <div layout="column" flex="30" class="personal-description">
+            <p>Kostis Tsafaris</p>
+            <p>Software developer with front-end skills. Loves to code...</p>
+        </div>
     </div>
 
-    <div class="background-main3">
-        <p>
-            This is my skills page. Below you can find all....
-        </p>
+    <div class="background-main3" in-view="mainCtrl.skillsInView($inview, $event)">
+        <!--<div ng-show="mainCtrl.showSkills" layout="row" layout-align="center center">-->
+        <!--<i class="fa fa-4x fa-html5" aria-hidden="true"></i>-->
+        <!--<div layout="column" flex-offset="5">-->
+        <!--<span>HTML5</span>-->
+        <!--<span>Web language </span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div ng-show="mainCtrl.showSkills" layout="row" layout-align="center center">-->
+        <!--<i class="fa fa-4x fa-css3" aria-hidden="true"></i>-->
+        <!--<div layout="column" flex-offset="5">-->
+        <!--<span>CSS3</span>-->
+        <!--<span>Cascade language </span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div flex ng-show="mainCtrl.showSkills" layout="row">
+            <div flex layout="column">
+                <div flex ng-repeat="skill in mainCtrl.skills1" layout="row">
+                    <div layout="row" layout-align="center center"><i class="fa fa-4x {{skill.icon}}"
+                                                                      aria-hidden="true"></i></div>
+                    <div layout="column" flex-offset="10">
+                        <span>{{skill.title}}</span>
+                        <span>{{skill.description}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div flex layout="column">
+                <div flex ng-repeat="skill in mainCtrl.skills2" layout="row">
+                    <div layout="row" layout-align="center center"><i class="fa fa-4x {{skill.icon}}"
+                                                                      aria-hidden="true"></i></div>
+                    <div layout="column" flex-offset="10">
+                        <span>{{skill.title}}</span>
+                        <span>{{skill.description}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </md-content>
@@ -183,6 +204,8 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.0/angular-material-icons.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/angular-typewrite/dist/angular-typewrite.js"></script>
+<script src="bower_components/angular-inview/angular-inview.js"></script>
+
 <script src="app.js"></script>
 <script src="main.controller.js"></script>
 <script src="components/home/js/home.controller.js"></script>

@@ -6,7 +6,8 @@ angular.module('kostisWebsite', [
     'ngMaterial',
     'ngMdIcons',
     'ngAnimate',
-    'angularTypewrite'
+    'angularTypewrite',
+    'angular-inview'
 ]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 
     $urlRouterProvider.otherwise('/home');
