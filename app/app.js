@@ -7,7 +7,9 @@ angular.module('kostisWebsite', [
     'ngMdIcons',
     'ngAnimate',
     'angularTypewrite',
-    'angular-inview'
+    'angular-inview',
+    'duScroll',
+    // 'smoothScroll'
 ]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
 
     $urlRouterProvider.otherwise('/home');
@@ -56,7 +58,7 @@ angular.module('kostisWebsite', [
     /*Theming*/
     $mdThemingProvider.theme('default')
         .primaryPalette('grey')
-        .accentPalette('orange')
-        .backgroundPalette('grey').dark();
+        .accentPalette('yellow')
+        .backgroundPalette('grey');
 
 });

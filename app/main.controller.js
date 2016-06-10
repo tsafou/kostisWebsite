@@ -15,6 +15,9 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
     vm.startTyping = false;
     vm.initView = false;
     vm.showSkills = false;
+    vm.showStartBtn = false;
+    var top = 0;
+    var duration = 2000; //milliseconds
 
     vm.menuItems = [
         {
@@ -46,7 +49,7 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
     vm.skills2 = [
         {
             title: "Javascript",
-            description: "Javascript, AngularJS",
+            description: "Javascript",
             icon: "fa-css3"
         },
         {
@@ -60,6 +63,10 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
             icon: "fa-database"
         }
     ];
+
+    vm.showStart = function () {
+        vm.showStartBtn = true;
+    };
 
     vm.startApp = function () {
         vm.showMenuButton = true;
@@ -90,8 +97,18 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
     };
 
     vm.scrollTo = function (id) {
-        $location.hash(id);
-        $anchorScroll();
+        // $location.hash(id);
+        // $anchorScroll();
+        var container = angular.element(document.getElementsByClassName('main-container'));
+        var element = angular.element(document.getElementById(id));
+        container.scrollToElementAnimated(element, 0, 1500);
+
+    };
+    vm.scrollToTop = function () {
+        var container = angular.element(document.getElementsByClassName('main-container'));
+        container.scrollTopAnimated(top, duration).then(function() {
+            console && console.log('You just scrolled to the top!');
+        });
     };
 
     $document.ready(function () {
@@ -100,7 +117,7 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
 
     vm.skillsInView = function (inview, event) {
         // console.log('in view: ', inview, event.inViewTarget);
-        console.log(inview)
+        // console.log(inview)
         if (inview) {
             $timeout(function () {
                 vm.showSkills = true

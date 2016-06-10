@@ -124,6 +124,13 @@ ul {
     color: white !important;
 }
 
+#scroll-top-button {
+    position: fixed;
+    right:2%;
+    bottom:2%;
+}
+
+
 
 
 /* when hiding the picture */
