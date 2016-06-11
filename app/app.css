@@ -42,13 +42,7 @@ ul {
 }
 
 .background-main2 {
-    /*min-height: 60vh;*/
-    /*!*background: url('assets/img/background-cubes.jpg') center center; !*fixed*!*!*/
-    /*background-color: cadetblue;*/
-    /*!*background-size: cover;*!*/
-    /*color: white;*/
-
-    min-height: 60vh;
+    min-height: 100vh;
     color: white;
     background: url('assets/img/me2.jpg') fixed center center;
     background-repeat: no-repeat;

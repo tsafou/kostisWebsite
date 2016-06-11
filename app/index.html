@@ -116,12 +116,8 @@
             </md-button>
         </div>
 
-        <div flex id="bio" class="background-main2" layout="row" layout-align="center center">
-            <!--<div><img ng-src="{{mainCtrl.author.avatar}}" class="profile-pic img-circle"></div>-->
-            <!--<div flex="5"></div>-->
-            <!--<div layout="column" flex>-->
-            <!--<p>{{mainCtrl.author.name}}</p>-->
-            <div flex="40" style="background-color: rgba(50,50,50,0.5); padding: 1em 4em;">
+        <div flex id="bio" class="background-main2" layout="row" layout-align="center center" layout-align-xs="center start" layout-padding>
+            <div flex="60" flex-xs="100" style="background-color: rgba(50,50,50,0.5);">
                 <p>{{mainCtrl.author.desc}}</p>
             </div>
             <!--</div>-->
@@ -175,14 +171,14 @@
                     </md-button>
                 </div>
 
-                <div layout="row" layout-align="center center" layout-padding>
+                <div layout="row" layout-xs="column" layout-align="center center" layout-padding>
                     <div flex="50" layout="column">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom'
                                             options="map.options" refresh="contact">
                             <ui-gmap-markers models="markers" coords="'self'" fit='false'></ui-gmap-markers>
                         </ui-gmap-google-map>
                     </div>
-                    <div flex="50" layout="column" md-theme="contact">
+                    <div flex="50" layout="column" >
                         <form flex layout="column" autocomplete="off" ng-submit="">
                             <md-input-container>
                                 <label>Your name</label>

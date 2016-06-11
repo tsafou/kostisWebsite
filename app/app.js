@@ -62,11 +62,6 @@ angular.module('kostisWebsite', [
         .accentPalette('amber')
         .backgroundPalette('grey').dark();
 
-    $mdThemingProvider.theme('contact')
-        .primaryPalette('amber')
-        .accentPalette('amber')
-        .dark();
-
     // Google Maps
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyBJlIUu2xoZT8DO3qsVsZFT9NZNeslH3JY',
