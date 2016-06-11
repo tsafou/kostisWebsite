@@ -9,8 +9,9 @@ angular.module('kostisWebsite', [
     'angularTypewrite',
     'angular-inview',
     'duScroll',
+    'uiGmapgoogle-maps'
     // 'smoothScroll'
-]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider) {
 
     $urlRouterProvider.otherwise('/home');
 
@@ -34,7 +35,7 @@ angular.module('kostisWebsite', [
         .state('home.list', {
             url: '/list',
             templateUrl: 'components/home/tpl/partial-home-list.html',
-            controller: function($scope) {
+            controller: function ($scope) {
                 $scope.dogs = ['Bernese', 'Husky', 'Goldendoodle'];
             }
         })
@@ -58,7 +59,18 @@ angular.module('kostisWebsite', [
     /*Theming*/
     $mdThemingProvider.theme('default')
         .primaryPalette('grey')
-        .accentPalette('yellow')
-        .backgroundPalette('grey');
+        .accentPalette('amber')
+        .backgroundPalette('grey').dark();
 
+    $mdThemingProvider.theme('contact')
+        .primaryPalette('amber')
+        .accentPalette('amber')
+        .dark();
+
+    // Google Maps
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyBJlIUu2xoZT8DO3qsVsZFT9NZNeslH3JY',
+        v: '3.23', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
 });

@@ -3,11 +3,12 @@
  */
 angular.module('kostisWebsite').controller('mainController', mainController);
 
-mainController.$inject = ['$mdSidenav', '$http', '$timeout', '$interval', '$location', '$anchorScroll', '$document'];
+mainController.$inject = ['$scope', '$mdSidenav', '$http', '$timeout', '$interval', '$location', '$anchorScroll', '$document'];
 
-function mainController($mdSidenav, $http, $timeout, $interval, $location, $anchorScroll, $document) {
+function mainController($scope, $mdSidenav, $http, $timeout, $interval, $location, $anchorScroll, $document) {
     var vm = this;
 
+    vm.contact = false;
     vm.init = true;
     vm.sidenavIsOpen = false;
     vm.countDown = 3;
@@ -19,18 +20,27 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
     var top = 0;
     var duration = 2000; //milliseconds
 
+    vm.author = {
+        "name": "Kostis Tsafaris",
+        "desc": "I am a Web Developer with a background in Physics and Renewable Energy. What drives me forward, is my passion for coding and new technologies.",
+        "avatar" : "assets/img/face-outline.png"
+    };
     vm.menuItems = [
         {
             "name": "Home",
             "url": "home"
         },
         {
-            "name": "About",
-            "url": "about"
+            "name": "Bio",
+            "url": "bio"
         },
         {
             "name": "Skills",
             "url": "skills"
+        },
+        {
+            "name": "Contact",
+            "url": "contact"
         }
     ];
 
@@ -48,18 +58,13 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
     ];
     vm.skills2 = [
         {
-            title: "Javascript",
+            title: "AngularJS",
             description: "Javascript",
             icon: "fa-css3"
         },
         {
-            title: "Database",
+            title: "T-SQL",
             description: "mySQL",
-            icon: "fa-database"
-        },
-        {
-            title: "Something",
-            description: "else",
             icon: "fa-database"
         }
     ];
@@ -101,18 +106,20 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
         // $anchorScroll();
         var container = angular.element(document.getElementsByClassName('main-container'));
         var element = angular.element(document.getElementById(id));
-        container.scrollToElementAnimated(element, 0, 1500);
+        container.scrollToElementAnimated(element, 0, 2000);
 
     };
     vm.scrollToTop = function () {
         var container = angular.element(document.getElementsByClassName('main-container'));
-        container.scrollTopAnimated(top, duration).then(function() {
-            console && console.log('You just scrolled to the top!');
+        container.scrollTopAnimated(top, duration).then(function () {
+            // console && console.log('You just scrolled to the top!');
         });
     };
 
     $document.ready(function () {
-        vm.startTyping = true;
+        $scope.$apply(function() {
+            vm.startTyping = true;
+        });
     });
 
     vm.skillsInView = function (inview, event) {
@@ -121,7 +128,7 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
         if (inview) {
             $timeout(function () {
                 vm.showSkills = true
-            });
+            },500);
         }
         else {
             $timeout(function () {
@@ -129,6 +136,9 @@ function mainController($mdSidenav, $http, $timeout, $interval, $location, $anch
             });
         }
 
-    }
+    };
+
+
+
 
 }
