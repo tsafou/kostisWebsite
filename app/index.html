@@ -13,7 +13,7 @@
     <title>Kostis Personal Website</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc4/angular-material.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/angular-typewrite/dist/angular-typewrite.css">
     <link rel="stylesheet" href="assets/animate/animate.css">
@@ -30,8 +30,8 @@
 <div ng-if="!mainCtrl.loading" layout="row" class="docs-body">
     <md-sidenav class="md-sidenav-left"
                 md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-md')"
                 md-whiteframe="4">
+    <!--md-is-locked-open="$mdMedia('gt-md')"-->
         <md-toolbar layout="row">
             <md-button ng-click="mainCtrl.closeSidebar()" class="md-icon-button" aria-label="Close menu">
                 <ng-md-icon icon="menu" style="fill: white"></ng-md-icon>
@@ -42,11 +42,8 @@
         </md-toolbar>
 
         <div layout="column" layout-align="center center" layout-margin>
-            <img src="assets/img/me.jpg" class="profile-pic"/>
-            <p layout="column" layout-align="center center">
-                <span>Kostis Tsafaris</span>
-                <span>Developer</span>
-            </p>
+            <!--<img src="assets/img/meOutline.png" class="profile-pic"/>-->
+
             <md-button style="width:100%;" ng-repeat="item in mainCtrl.menuItems"
                        ui-sref-active="active" ng-click="mainCtrl.scrollTo(item.url); mainCtrl.closeSidebar()"
                        aria-label="Close menu">{{item.name}}
@@ -56,7 +53,7 @@
     </md-sidenav>
 
 
-    <md-content class="main-container" in-view-container show-scroll>
+    <md-content class="main-container" in-view-container show-scroll ng-mousemove="mainCtrl.mouseMoved()">
 
         <div class="background-main1" layout-padding>
             <md-toolbar class="md-medium-tall" style="background: transparent;" layout="column" layout-align="center">
@@ -78,18 +75,17 @@
 
             <div class="social-icons">
                 <ul>
-                    <li><a href="https://www.youtube.com/channel/UCe5pmZwhMoydaD8ImXPSKzQ" target="_blank"><i
-                            class="fa fa-lg fa-fw fa-youtube"></i></a></li>
-                    <li><a href=""><i class="fa fa-lg fa-fw fa-twitter" target="_blank"></i></a></li>
-                    <li><a href="http://facebook.com/tsafou" target="_blank"><i class="fa fa-lg fa-fw fa-facebook"></i></a>
+                    <li ng-repeat="social in mainCtrl.socials">
+                        <a ng-href="{{social.url}}" target="_blank"
+                           ng-mouseenter="mainCtrl.selectSocial($index)" ng-mouseleave="mainCtrl.selectSocial()"
+                           ng-class="{'hover-social': mainCtrl.selectedSocial == $index}">
+                            <i class="fa fa-lg fa-fw {{social.name}}"></i>
+                        </a>
                     </li>
-                    <li><a href="https://gr.linkedin.com/in/kostistsafaris" target="_blank"><i
-                            class="fa fa-lg fa-linkedin" aria-hidden="true"></i></a></li>
-                    <li><a href=""><i class="fa fa-lg fa-fw fa-google-plus" target="_blank"></i></a></li>
                 </ul>
             </div>
 
-            <div flex layout="column" layout-align="space-between center" style="height: calc(100% - 88px);">
+            <div flex layout="column" layout-align="space-between center" class="welcome-main">
                 <!--subtract the height of the md-toolbar-->
                 <div></div>
                 <h3 class="text-center">
@@ -103,63 +99,79 @@
 
                 <div layout="row">
                     <div flex layout="row" ng-if="mainCtrl.showStartBtn;">
-                        <md-button flex="50" class="md-accent" ng-click="mainCtrl.scrollTo('bio')" aria-label="Start">
+                        <md-button class="start-btn md-accent" ng-click="mainCtrl.scrollTo('bio')" aria-label="Start">
                             Start
                         </md-button>
                     </div>
                 </div>
             </div>
 
-            <md-button ng-if="showArrow" id="scroll-top-button" class="md-icon-button md-accent"
+            <md-button ng-if="mainCtrl.forceShowArrow || (showArrow && mouseMoved)"
+                       ng-mouseenter="mainCtrl.forceShowArrow=true"
+                       ng-mouseleave="mainCtrl.forceShowArrow=false" id="scroll-top-button"
+                       class="md-icon-button md-accent"
                        ng-click="mainCtrl.scrollToTop()" aria-label="Scroll to top">
                 <i class="fa fa-2x fa-chevron-up" aria-hidden="true"></i>
             </md-button>
         </div>
 
-        <div flex id="bio" class="background-main2" layout="row" layout-align="center center" layout-align-xs="center start" layout-padding>
-            <div flex="60" flex-xs="100" style="background-color: rgba(50,50,50,0.5);">
-                <p>{{mainCtrl.author.desc}}</p>
+        <div flex id="bio" class="background-main2" layout="column" layout-align="center space-between"
+             layout-padding>
+            <div flex></div>
+            <div flex layout="column" layout-align="center center" style="background-color: rgba(0,0,0,0.5); padding: 4% 20%;">
+                <p ng-class="{'no-margin-top': $mdMedia('xs')}">{{mainCtrl.author.desc}}</p>
             </div>
-            <!--</div>-->
+            <div flex layout="column" layout-align="end center" style="padding-bottom: 0;">
+                <md-button class="start-btn md-accent" ng-click="mainCtrl.scrollTo('skills')" aria-label="Go to skills">
+                    <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                </md-button>
+            </div>
         </div>
 
-        <div id="skills" class="background-main3" in-view="mainCtrl.skillsInView($inview, $event)" layout-padding>
+        <div id="skills" class="background-main3" in-view="mainCtrl.skillsInView($inview, $event)" layout="column" layout-align="space-between" layout-padding>
 
             <h3 layout="row" layout-align="center">Skills</h3>
 
             <div ng-show="mainCtrl.showSkills" layout="row" layout-xs="column">
 
-                <div flex layout="column" layout-align="center">
-                    <div ng-repeat="skill in mainCtrl.skills1" layout="row" layout-align="center center" layout-padding>
-                        <div layout="row"><i class="fa fa-3x {{skill.icon}}"
-                                             aria-hidden="true"></i></div>
-                        <div flex layout="column" flex-offset="5">
+                <div flex layout="column">
+                    <div ng-repeat="skill in mainCtrl.skills1" layout="row" layout-align="start center" layout-padding>
+                        <div flex-offset="10">
+                            <i class="fa fa-3x fa-fw {{skill.icon}}" aria-hidden="true"></i>
+                        </div>
+                        <div flex-offset="5" layout="column">
                             <span>{{skill.title}}</span>
                             <!--<span>{{skill.description}}</span>-->
                         </div>
                     </div>
                 </div>
 
-                <div flex layout="column" layout-align="center">
-                    <div ng-repeat="skill in mainCtrl.skills2" layout="row" layout-align="center center" layout-padding>
-                        <div layout="row"><i class="fa fa-3x {{skill.icon}}"
-                                             aria-hidden="true"></i></div>
-                        <div flex layout="column" flex-offset="5">
+                <div flex layout="column">
+                    <div flex ng-repeat="skill in mainCtrl.skills2" layout="row" layout-align="start center" layout-padding>
+                        <div flex-offset="10">
+                            <i class="fa fa-3x fa-fw {{skill.icon}}" aria-hidden="true"></i>
+                        </div>
+                        <div flex-offset="5" layout="column">
                             <span>{{skill.title}}</span>
                             <!--<span>{{skill.description}}</span>-->
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div layout="row" layout-align="center center">
+                <a class="md-warn" target="_self" href="cv.pdf" download="k_Tsafaris-CV.pdf">*Download CV</a>
             </div>
         </div>
 
         <div id="contact" class="background-main4" in-view="mainCtrl.contactInView($inview, $event)"
              ng-controller="mapController as mapCtrl">
             <div ng-if="!mainCtrl.contact" layout="row" layout-align="center center">
-                <md-button layout="column" class="md-accent"
+                <md-button flex layout="column" class="globe md-accent"
                            ng-click="mainCtrl.contact =! mainCtrl.contact; mainCtrl.scrollTo('contact');">
-                    <i class="fa fa-2x fa-globe" aria-hidden="true"></i>
+                    <span><i class="fa fa-2x fa-globe" aria-hidden="true"></i></span>
                     <span>Contact</span>
+                    <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                 </md-button>
             </div>
 
@@ -178,8 +190,8 @@
                             <ui-gmap-markers models="markers" coords="'self'" fit='false'></ui-gmap-markers>
                         </ui-gmap-google-map>
                     </div>
-                    <div flex="50" layout="column" >
-                        <form flex layout="column" autocomplete="off" ng-submit="">
+                    <div flex="50" layout="column">
+                        <form novalidate id="contact-form" name="contactForm" flex layout="column" autocomplete="off" ng-submit="">
                             <md-input-container>
                                 <label>Your name</label>
                                 <input ng-model="user.name">
@@ -196,7 +208,7 @@
                                           md-select-on-focus></textarea>
                             </md-input-container>
 
-                            <md-button type="submit" class="md-accent md-raised" ng-click="">Send</md-button>
+                            <md-button type="submit" class="md-accent md-raised" ng-click="mainCtrl.showSendMessage($event);">Send</md-button>
                         </form>
                     </div>
                 </div>
@@ -209,11 +221,11 @@
     </md-content>
 </div>
 
-<script src="bower_components/angular-messages/angular-messages.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="bower_components/angular-aria/angular-aria.min.js"></script>
-<script src="bower_components/angular-loader/angular-loader.min.js"></script>
-<script src="bower_components/angular-material/angular-material.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.6/angular-messages.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-animate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-aria.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-loader.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.0-rc4/angular-material.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.7.0/angular-material-icons.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/angular-typewrite/dist/angular-typewrite.js"></script>

@@ -3,9 +3,9 @@
  */
 angular.module('kostisWebsite').controller('mainController', mainController);
 
-mainController.$inject = ['$scope', '$mdSidenav', '$http', '$timeout', '$interval', '$location', '$anchorScroll', '$document'];
+mainController.$inject = ['$scope', '$mdSidenav', '$http', '$timeout', '$interval', '$location', '$anchorScroll', '$document', '$mdMedia', '$mdDialog'];
 
-function mainController($scope, $mdSidenav, $http, $timeout, $interval, $location, $anchorScroll, $document) {
+function mainController($scope, $mdSidenav, $http, $timeout, $interval, $location, $anchorScroll, $document, $mdMedia, $mdDialog) {
     var vm = this;
 
     vm.contact = false;
@@ -17,13 +17,40 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     vm.initView = false;
     vm.showSkills = false;
     vm.showStartBtn = false;
+    vm.forceShowArrow = false;
+    $scope.mouseMoved = false;
+    $scope.$mdMedia = $mdMedia;
     var top = 0;
     var duration = 2000; //milliseconds
 
+    vm.selectedSocial = -1;
+
+    vm.selectSocial = function (index) {
+        if (index == undefined) {
+            vm.selectedSocial = -1;
+            return;
+        }
+        vm.selectedSocial = index;
+    };
+
+    vm.socials = [
+        {
+            url: 'https://www.youtube.com/channel/UCe5pmZwhMoydaD8ImXPSKzQ',
+            name: 'fa-youtube'
+        },
+        {
+            url: 'http://facebook.com/tsafou',
+            name: 'fa-facebook'
+        },
+        {
+            url: 'https://gr.linkedin.com/in/kostistsafaris',
+            name: 'fa-linkedin'
+        }
+    ];
     vm.author = {
         "name": "Kostis Tsafaris",
         "desc": "I am a Web Developer with a background in Physics and Renewable Energy. What drives me forward, is my passion for coding and new technologies.",
-        "avatar" : "assets/img/face-outline.png"
+        "avatar": "assets/img/face-outline.png"
     };
     vm.menuItems = [
         {
@@ -54,18 +81,28 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
             title: "CSS3",
             description: "CSS is bla",
             icon: "fa-css3"
+        },
+        {
+            title: "AngularJS",
+            description: "Javascript",
+            icon: "fa-code"
         }
     ];
     vm.skills2 = [
         {
-            title: "AngularJS",
-            description: "Javascript",
-            icon: "fa-css3"
-        },
-        {
             title: "T-SQL",
             description: "mySQL",
             icon: "fa-database"
+        },
+        {
+            title: "PHP",
+            description: "PHP",
+            icon: "fa-code"
+        },
+        {
+            title: "CMS",
+            description: "Wordpress, Joomla",
+            icon: "fa-desktop"
         }
     ];
 
@@ -117,7 +154,7 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     };
 
     $document.ready(function () {
-        $scope.$apply(function() {
+        $scope.$apply(function () {
             vm.startTyping = true;
         });
     });
@@ -128,7 +165,7 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
         if (inview) {
             $timeout(function () {
                 vm.showSkills = true
-            },500);
+            }, 500);
         }
         else {
             $timeout(function () {
@@ -138,7 +175,27 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
 
     };
 
+    /*
+     Catch mouse movement and show scroll to top arrow for a short duratio
+     */
+    vm.mouseMoved = function () {
+        $scope.mouseMoved = true;
+        $timeout(function () {
+            $scope.mouseMoved = false;
+        }, 2000);
+    };
 
-
-
+    vm.showSendMessage = function (ev) {
+        $mdDialog.show(
+            $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#contact-form')))
+                .clickOutsideToClose(true)
+                .title('Sorry!')
+                .textContent('This feature is not yet implemented. Please check back soon!')
+                .ariaLabel('Alert Dialog')
+                .ok('Got it!')
+                .targetEvent(ev)
+        );
+    };
+    
 }

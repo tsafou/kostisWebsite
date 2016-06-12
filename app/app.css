@@ -1,4 +1,6 @@
-
+a {
+    text-decoration: none;
+}
 p {
     /*margin: 0px;*/
     font-family: "Khand", sans-serif !important;
@@ -33,22 +35,34 @@ ul {
     background: transparent;
     width: 100%;
 }
-
+.welcome-main {
+    height: calc(100% - 88px);
+    padding-bottom: 0 !important;
+}
 .background-main1 {
     height: 100vh;
     background: url('assets/img/background-keyboard-color.jpg') center center; /*fixed*/
     background-size: cover;
     color: white;
+    padding-bottom: 0;
 }
-
+.start-btn {
+    border: 1px solid;
+    border-bottom:none;
+    margin-bottom: 0;
+    padding: 0 40px;
+}
 .background-main2 {
     min-height: 100vh;
     color: white;
     background: url('assets/img/me2.jpg') fixed center center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom: 0;
 }
-
+.no-margin-top {
+    margin-top: 0;
+}
 .background-main3 {
     min-height: 60vh;
     background-color: whitesmoke;
@@ -61,12 +75,28 @@ ul {
 }
 .background-main4 {
     /*min-height: 100vh;*/
-    background-color: black;
+    background-color: rgba(0,0,0,0.8);
     /*color: gold;*/
+}
+#contact .globe.md-button {
+    margin:0;
+    padding: 0px;
+}
+#contact span:nth-child(1){
+    margin-top: 6px;
+}
+#contact span:nth-child(2){
+    margin-top: -12px;
+}
+#contact span:nth-child(3){
+    margin-top: -18px;
 }
 
 .active {
     background-color: lightgrey;
+}
+.hover-social i {
+    color: rgb(255,193,7) !important;
 }
 
 .show-menu {

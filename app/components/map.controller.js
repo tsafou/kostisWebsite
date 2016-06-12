@@ -26,7 +26,7 @@ function mapController($scope, uiGmapIsReady, uiGmapGoogleMapApi) {
                 latitude: 40.578412,
                 longitude: 23.021786
             },
-            zoom: 5,
+            zoom: 8,
             options: {scrollwheel: false}
         };
 
