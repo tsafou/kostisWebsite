@@ -98,7 +98,7 @@
                     <!--subtract the height of the md-toolbar-->
                     <div></div>
                     <h2 class="text-center">
-                <pre class="typewrite" typewrite start="mainCtrl.startTyping" blink-cursor="false"
+                <pre class="typewrite text-center" typewrite start="mainCtrl.startTyping" blink-cursor="false"
                      text="'Kostis Tsafaris'" initial-delay="0s" type-delay="150"></pre>
                         <br/>
                 <pre class="typewrite" typewrite start="mainCtrl.startTyping" text="'Web Developer'" initial-delay="3s"
@@ -116,6 +116,8 @@
                     </div>
                 </div>
 
+                test: {{mainCtrl.forceShowArrow}}
+                test2: {{showArrow}}
                 <!--&& mouseMoved-->
                 <md-button ng-if="mainCtrl.forceShowArrow || (showArrow)"
                            ng-mouseenter="mainCtrl.forceShowArrow=true"
@@ -200,7 +202,8 @@
 
                 <div ng-if="mainCtrl.contact" layout="column" layout-padding>
                     <div layout="row" layout-align="center center">
-                        <md-button class="md-mini md-icon md-fab md-accent" ng-click="mainCtrl.contact =! mainCtrl.contact"
+                        <md-button class="md-mini md-icon md-fab md-accent"
+                                   ng-click="mainCtrl.contact =! mainCtrl.contact"
                                    aria-label="Toggle map">
                             <i class="fa fa-lg fa-arrow-up" aria-hidden="true"></i>
                         </md-button>
