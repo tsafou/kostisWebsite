@@ -9,7 +9,7 @@ function showScroll() {
     return function (scope, element, attrs) {
         angular.element(element).bind("scroll", function () {
             var scrollPosition = element[0].scrollTop;
-            if (scrollPosition < 50)
+            if (scrollPosition < 100)
                 scope.showArrow = false;
             else
                 scope.showArrow = true;

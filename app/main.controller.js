@@ -178,12 +178,12 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     /*
      Catch mouse movement and show scroll to top arrow for a short duratio
      */
-    vm.mouseMoved = function () {
-        $scope.mouseMoved = true;
-        $timeout(function () {
-            $scope.mouseMoved = false;
-        }, 2000);
-    };
+    // vm.mouseMoved = function () {
+    //     $scope.mouseMoved = true;
+    //     $timeout(function () {
+    //         $scope.mouseMoved = false;
+    //     }, 2000);
+    // };
 
     vm.showSendMessage = function (ev) {
         $mdDialog.show(

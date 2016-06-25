@@ -12,7 +12,7 @@ ul {
 }
 
 .docs-body {
-    overflow: hidden;
+    /*overflow: hidden;*/
     max-width: 100%;
     max-height: 100%;
 }
@@ -30,7 +30,12 @@ ul {
     background: url('https://images7.alphacoders.com/437/437606.jpg') fixed center center;
     -moz-background-size: cover;
 }
-
+.mouse-catcher {
+    height: 100%;
+    position: absolute;
+    right:0;
+    background-color: red;
+}
 .main-container {
     background: transparent;
     width: 100%;
@@ -97,6 +102,7 @@ ul {
 }
 .hover-social i {
     color: rgb(255,193,7) !important;
+    cursor: pointer;
 }
 
 .show-menu {
@@ -177,8 +183,12 @@ ul {
     position: fixed;
     right: 2%;
     bottom: 2%;
+    z-index: 100;
+    line-height: 0;
 }
-
+#scroll-top-button:hover i {
+    /*font-size:2.1em;*/
+}
 .angular-google-map-container {
     height: 80vh;
 }
