@@ -18,6 +18,8 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     vm.showSkills = false;
     vm.showStartBtn = false;
     vm.forceShowArrow = false;
+    vm.messageSent = false;
+
     $scope.mouseMoved = false;
     $scope.$mdMedia = $mdMedia;
     var top = 0;
@@ -49,7 +51,7 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     ];
     vm.author = {
         "name": "Kostis Tsafaris",
-        "desc": "I am a Web Developer with a background in Physics and Renewable Energy. What drives me forward, is my passion for coding and new technologies.",
+        "desc": "I am a Web Developer with a background in Physics and Renewable Energy. What drives me forward, is my passion for coding and new technologies. Feel free to navigate through my website and don't forget to visit my social media pages!",
         "avatar": "assets/img/face-outline.png"
     };
     vm.menuItems = [
@@ -186,16 +188,44 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     // };
 
     vm.showSendMessage = function (ev) {
-        $mdDialog.show(
-            $mdDialog.alert()
-                .parent(angular.element(document.querySelector('#contact-form')))
-                .clickOutsideToClose(true)
-                .title('Sorry!')
-                .textContent('This feature is not yet implemented. Please check back soon!')
-                .ariaLabel('Alert Dialog')
-                .ok('Got it!')
-                .targetEvent(ev)
-        );
+        var url = "https://formspree.io/dinos1@hotmail.com";
+        var method = "POST";
+        var req = {
+            method: method,
+            url: url,
+            headers: {
+                'Content-type': 'application/json'
+            },
+            data: {form: vm.user}
+            // data: {message: "hello!"}
+        };
+
+        if (vm.contactForm.$valid) {
+            $http(req).then(function () {
+                $timeout(function(){
+                    vm.messageSent = true;
+                    vm.user = {};
+                    vm.contactForm.$setPristine();
+                    vm.contactForm.$setUntouched();
+                });
+
+                $timeout(function() {vm.messageSent = false;}, 5000);
+
+            });
+        }
+        else {
+            // $mdDialog.show(
+            //     $mdDialog.alert()
+            //         .parent(angular.element(document.querySelector('#contact-form')))
+            //         .clickOutsideToClose(true)
+            //         .title('Sorry!')
+            //         .textContent('This feature is not yet implemented. Please check back soon!')
+            //         .ariaLabel('Alert Dialog')
+            //         .ok('Got it!')
+            //         .targetEvent(ev)
+            // );
+        }
+
     };
-    
+
 }

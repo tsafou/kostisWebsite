@@ -35,8 +35,10 @@
     <link rel="icon" type="image/png" href="assets/favicon/favicon-16x16.png" sizes="16x16">
     <link rel="manifest" href="assets/favicon/manifest.json">
     <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
+    <link rel="shortcut icon" href="assets/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffc40d">
     <meta name="msapplication-TileImage" content="assets/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <!--END-->
     <link rel="stylesheet"
@@ -62,17 +64,17 @@
         <md-toolbar layout="row" layout-align="space-between center">
             <div flex>
                 <md-button ng-click="mainCtrl.closeSidebar()" class="md-icon-button" aria-label="Close menu">
-                    <ng-md-icon icon="menu"></ng-md-icon>
+                    <ng-md-icon icon="arrow_back"></ng-md-icon>
                 </md-button>
             </div>
-            <h2 flex style="text-align: center;">Menu</h2>
+            <p flex style="text-align: center;">Menu</p>
             <div flex></div>
         </md-toolbar>
 
         <div layout="column" layout-align="center center">
             <!--<img src="assets/img/meOutline.png" class="profile-pic"/>-->
 
-            <md-button style="width:100%;" ng-repeat="item in mainCtrl.menuItems"
+            <md-button ng-repeat="item in mainCtrl.menuItems"
                        ui-sref-active="active" ng-click="mainCtrl.scrollTo(item.url); mainCtrl.closeSidebar()"
                        aria-label="Close menu">{{item.name}}
             </md-button>
@@ -93,12 +95,12 @@
                                 <ng-md-icon icon="menu" style="fill: white"></ng-md-icon>
                             </md-button>
                         </div>
-                        <div class="md-toolbar-tools" layout-align="center center" hide-xs>
-                            <md-button ng-repeat="item in mainCtrl.menuItems" ng-click="mainCtrl.scrollTo(item.url)"
-                                       ui-sref-active="active" class="menu-toolbar-button">{{item.name}}
-                            </md-button>
-                            <!--ui-sref="{{item.url}}"-->
-                        </div>
+                        <!--<div class="md-toolbar-tools" layout-align="center center" hide-xs>-->
+                        <!--<md-button ng-repeat="item in mainCtrl.menuItems" ng-click="mainCtrl.scrollTo(item.url)"-->
+                        <!--ui-sref-active="active" class="menu-toolbar-button">{{item.name}}-->
+                        <!--</md-button>-->
+                        <!--&lt;!&ndash;ui-sref="{{item.url}}"&ndash;&gt;-->
+                        <!--</div>-->
                         <div flex></div>
                     </div>
                 </md-toolbar>
@@ -123,7 +125,7 @@
                      text="'Kostis Tsafaris'" initial-delay="0s" type-delay="150"></pre>
                         <br/>
                 <pre class="typewrite" typewrite start="mainCtrl.startTyping" text="'Web Developer'" initial-delay="3s"
-                     type-delay="150" blink-delay="350" callback-fn="mainCtrl.showStart();"></pre>
+                     type-delay="100" blink-delay="350" callback-fn="mainCtrl.showStart();"></pre>
                         <br/>
                     </h2>
 
@@ -131,7 +133,7 @@
                         <div flex layout="row" ng-if="mainCtrl.showStartBtn;">
                             <md-button class="start-btn md-accent" ng-click="mainCtrl.scrollTo('bio')"
                                        aria-label="Start">
-                                Start
+                                <span>Start</span>
                             </md-button>
                         </div>
                     </div>
@@ -154,13 +156,14 @@
                 <div flex></div>
                 <div flex layout="column" layout-align="center center"
                      style="background-color: rgba(0,0,0,0.5); padding: 4% 20%;">
-                    <h2>About me</h2>
+                    <h2 style="align-self: flex-start;">About me</h2>
                     <p ng-class="{'no-margin-top': $mdMedia('xs')}">{{mainCtrl.author.desc}}</p>
+                    <p ng-class="{'no-margin-top': $mdMedia('xs')}">{{mainCtrl.author.desc2}}</p>
                 </div>
                 <div flex layout="column" layout-align="end center" style="padding-bottom: 0;">
                     <md-button class="start-btn md-accent" ng-click="mainCtrl.scrollTo('skills')"
                                aria-label="Go to skills">
-                        <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-lg fa-caret-down" aria-hidden="true"></i></span>
                     </md-button>
                 </div>
             </div>
@@ -211,12 +214,14 @@
             <div id="contact" class="background-main4" in-view="mainCtrl.contactInView($inview, $event)"
                  ng-controller="mapController as mapCtrl" layout="column" layout-align="center">
                 <div ng-if="!mainCtrl.contact" layout="row" layout-align="center center">
-                    <md-button flex layout="column" class="globe md-accent"
-                               ng-click="mainCtrl.contact =! mainCtrl.contact; mainCtrl.scrollTo('contact');">
-                        <span><i class="fa fa-2x fa-globe" aria-hidden="true"></i></span>
-                        <span>Contact</span>
-                        <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                    </md-button>
+                    <div flex>
+                        <md-button layout="column" class="globe md-accent"
+                                   ng-click="mainCtrl.contact =! mainCtrl.contact; mainCtrl.scrollTo('contact');">
+                            <span><i class="fa fa-2x fa-globe" aria-hidden="true"></i></span>
+                            <span>Contact</span>
+                            <span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                        </md-button>
+                    </div>
                 </div>
 
                 <div ng-if="mainCtrl.contact" layout="column" layout-padding>
@@ -236,29 +241,51 @@
                             </ui-gmap-google-map>
                         </div>
                         <div flex="50" flex-xs="100" layout="column">
-                            <form novalidate id="contact-form" name="contactForm" flex layout="column"
-                                  autocomplete="off"
-                                  ng-submit="">
+                            <form novalidate id="contact-form" name="mainCtrl.contactForm" flex layout="column"
+                                  autocomplete="off">
                                 <md-input-container>
-                                    <label>Your name</label>
-                                    <input ng-model="user.name">
+                                    <label for="name">Your name</label>
+                                    <input ng-model="mainCtrl.user.name" id="name" name="name" required>
+                                    <div ng-messages="mainCtrl.contactForm.name.$error" ng-if="mainCtrl.contactForm.name.$touched" class="error-messages"
+                                         role="alert">
+                                        <div ng-message="required">*Please enter your name.</div>
+                                    </div>
                                 </md-input-container>
 
                                 <md-input-container>
-                                    <label>Your e-mail</label>
-                                    <input ng-model="user.email" type="email">
+                                    <label for="email">Your e-mail</label>
+                                    <input ng-model="mainCtrl.user.email" id="email" name="_replyto" type="email" required>
+                                    <div ng-messages="mainCtrl.contactForm._replyto.$error" ng-if="mainCtrl.contactForm._replyto.$touched" class="error-messages"
+                                         role="alert">
+                                        <div ng-message="email">*Please enter a valid e-mail address.</div>
+                                        <div ng-message="required">*Please enter your e-mail address.</div>
+                                    </div>
                                 </md-input-container>
 
                                 <md-input-container class="md-block">
-                                    <label>Your message</label>
-                                <textarea ng-model="user.message" md-maxlength="150" rows="5"
-                                          md-select-on-focus></textarea>
+                                    <label for="message">Your message</label>
+                                <textarea ng-model="mainCtrl.user.message" id="message" name="message"
+                                          ng-maxlength="150" rows="5"
+                                          md-select-on-focus required></textarea>
+                                    <div ng-messages="mainCtrl.contactForm.message.$error" ng-if="mainCtrl.contactForm.message.$touched" class="error-messages"
+                                         role="alert">
+                                        <div ng-message="required">*Please enter your message.</div>
+                                        <div ng-message="maxlength">*Your message is too long (max 150 chars allowed).</div>
+                                    </div>
                                 </md-input-container>
 
+                                <input type="hidden" name="_next" value="www.tsafaris.com/"/>
+                                <input type="text" name="_gotcha" style="display:none"/>
+
                                 <md-button type="submit" class="md-accent md-raised"
-                                           ng-click="mainCtrl.showSendMessage($event);">Send
+                                           ng-click="mainCtrl.showSendMessage($event);"
+                                >Send
                                 </md-button>
+
+                                <div ng-if="mainCtrl.messageSent" class="message-success" layout-padding>Your message was sent successfully.</div>
+
                             </form>
+
                         </div>
                     </div>
 
@@ -287,10 +314,10 @@
 
 
 <script src="app.js"></script>
-<!--<script src="main.controller.js"></script>-->
+<script src="main.controller.js"></script>
 
 
-<script src="main.controller.min.js"></script>
+<!--<script src="main.controller.min.js"></script>-->
 <script src="components/map.controller.js"></script>
 <!--<script src="components/home/js/home.controller.js"></script>-->
 <script src="scroll.button.directive.js"></script>

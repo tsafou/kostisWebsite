@@ -9,9 +9,12 @@ angular.module('kostisWebsite', [
     'angularTypewrite',
     'angular-inview',
     'duScroll',
-    'uiGmapgoogle-maps'
+    'uiGmapgoogle-maps',
+    'ngMessages'
     // 'smoothScroll'
-]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider) {
+]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, $httpProvider) {
+    // //Enable cross domain calls
+    // $httpProvider.defaults.useXDomain = true;
 
     $urlRouterProvider.otherwise('/home');
 
