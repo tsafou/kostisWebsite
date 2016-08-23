@@ -86,6 +86,11 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
             title: "AngularJS",
             description: "Javascript",
             icon: "fa-code"
+        },
+        {
+            title: "Photoshop",
+            description: "...",
+            icon: "fa-picture-o"
         }
     ];
     vm.skills2 = [
@@ -103,6 +108,11 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
             title: "CMS",
             description: "Wordpress, Joomla",
             icon: "fa-desktop"
+        },
+        {
+            title: "Repo",
+            description: "Git Repository",
+            icon: "fa-git"
         }
     ];
 
