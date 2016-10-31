@@ -12,7 +12,8 @@ angular.module('kostisWebsite', [
     'uiGmapgoogle-maps',
     'ngMessages'
     // 'smoothScroll'
-]).config(function ($stateProvider, $urlRouterProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, $httpProvider) {
+]).config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', 'uiGmapGoogleMapApiProvider', '$httpProvider',
+    function ($stateProvider, $urlRouterProvider, $mdThemingProvider, uiGmapGoogleMapApiProvider, $httpProvider) {
     // //Enable cross domain calls
     // $httpProvider.defaults.useXDomain = true;
 
@@ -71,4 +72,4 @@ angular.module('kostisWebsite', [
         v: '3.23', //defaults to latest 3.X anyhow
         libraries: 'weather,geometry,visualization'
     });
-});
+}]);

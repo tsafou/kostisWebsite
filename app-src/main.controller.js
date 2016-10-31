@@ -19,6 +19,7 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     vm.showStartBtn = false;
     vm.forceShowArrow = false;
     vm.messageSent = false;
+    vm.errorMessage = false;
 
     $scope.mouseMoved = false;
     $scope.$mdMedia = $mdMedia;
@@ -87,7 +88,7 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
         {
             title: "AngularJS",
             description: "Javascript",
-            icon: "fa-code"
+            icon: "fa-desktop"
         },
         {
             title: "Photoshop",
@@ -107,10 +108,15 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
             icon: "fa-code"
         },
         {
-            title: "CMS",
-            description: "Wordpress, Joomla",
-            icon: "fa-desktop"
+            title: "Javascript",
+            description: "Javascript",
+            icon: "fa-code"
         },
+        // {
+        //     title: "CMS",
+        //     description: "Wordpress, Joomla",
+        //     icon: "fa-desktop"
+        // },
         {
             title: "Repo",
             description: "Git Repository",
@@ -156,8 +162,11 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
         var container = angular.element(document.getElementsByClassName('main-container'));
         var element = angular.element(document.getElementById(id));
         container.scrollToElementAnimated(element, 0, 2000);
-
+        if (id=='contact') {
+            vm.contact = true;
+        }
     };
+
     vm.scrollToTop = function () {
         var container = angular.element(document.getElementsByClassName('main-container'));
         container.scrollTopAnimated(top, duration).then(function () {
@@ -197,44 +206,76 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     //     }, 2000);
     // };
 
-    vm.showSendMessage = function (ev) {
-        var url = "https://formspree.io/dinos1@hotmail.com";
-        var method = "POST";
-        var req = {
-            method: method,
-            url: url,
-            headers: {
-                'Content-type': 'application/json'
-            },
-            data: {form: vm.user}
-            // data: {message: "hello!"}
-        };
+    // vm.showSendMessage = function (ev) {
+    //     var url = "https://formspree.io/dinos1@hotmail.com";
+    //     var method = "POST";
+    //     var req = {
+    //         method: method,
+    //         url: url,
+    //         headers: {
+    //             'Content-type': 'application/json'
+    //         },
+    //         data: {form: vm.user}
+    //         // data: {message: "hello!"}
+    //     };
+    //
+    //     if (vm.contactForm.$valid) {
+    //         $http(req).then(function () {
+    //             $timeout(function () {
+    //                 vm.messageSent = true;
+    //                 vm.user = {};
+    //                 vm.contactForm.$setPristine();
+    //                 vm.contactForm.$setUntouched();
+    //             });
+    //
+    //             $timeout(function () {
+    //                 vm.messageSent = false;
+    //             }, 5000);
+    //
+    //         });
+    //     }
+    //     else {
+    //         // $mdDialog.show(
+    //         //     $mdDialog.alert()
+    //         //         .parent(angular.element(document.querySelector('#contact-form')))
+    //         //         .clickOutsideToClose(true)
+    //         //         .title('Sorry!')
+    //         //         .textContent('This feature is not yet implemented. Please check back soon!')
+    //         //         .ariaLabel('Alert Dialog')
+    //         //         .ok('Got it!')
+    //         //         .targetEvent(ev)
+    //         // );
+    //     }
+    //
+    // };
 
-        if (vm.contactForm.$valid) {
-            $http(req).then(function () {
-                $timeout(function(){
+
+    vm.sendEmail = function () {
+        $http({
+            method: 'POST',
+            url: 'php/email.php',
+            data: $.param(vm.user),  // pass in data as strings
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
+        })
+            .then(function successCallback(response) {
+
+                $timeout(function () {
+                    vm.errorMessage = false;
                     vm.messageSent = true;
                     vm.user = {};
                     vm.contactForm.$setPristine();
                     vm.contactForm.$setUntouched();
                 });
 
-                $timeout(function() {vm.messageSent = false;}, 5000);
-
+                $timeout(function () {
+                    vm.messageSent = false;
+                }, 4000);
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                vm.errorMessage = true;
             });
-        }
-        else {
-            // $mdDialog.show(
-            //     $mdDialog.alert()
-            //         .parent(angular.element(document.querySelector('#contact-form')))
-            //         .clickOutsideToClose(true)
-            //         .title('Sorry!')
-            //         .textContent('This feature is not yet implemented. Please check back soon!')
-            //         .ariaLabel('Alert Dialog')
-            //         .ok('Got it!')
-            //         .targetEvent(ev)
-            // );
-        }
+
 
     };
 
