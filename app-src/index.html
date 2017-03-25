@@ -15,14 +15,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Personal website of developer Konstantinos (aka Kostis or Kostas) Tsafaris">
-    <meta name="keywords" content="HTML5, CSS3, AngularJs, JavaScript, PHP, Kostis, Kostas, Konstantinos, Tsafaris, Κωστής, Κώστας, Κωνσταντίνος, Τσάφαρης, Skills, Web Developer, Software Developer, Developer">
+    <meta name="keywords"
+          content="HTML5, CSS3, AngularJs, JavaScript, PHP, Kostis, Kostas, Konstantinos, Tsafaris, Κωστής, Κώστας, Κωνσταντίνος, Τσάφαρης, Skills, Web Developer, Software Developer, Developer">
     <meta name="author" content="Konstantinos Tsafaris">
 
     <!-- BEGIN Open Graph tags -->
     <meta property="og:site_name" content="Kostis Tsafaris - My Personal Website"/>
     <meta property="og:title" content="Personal website of developer Konstantinos Tsafaris!"/>
-    <meta property="og:description" content="This is the personal website of web developer Konstantinos (Kostis or Kostas) Tsafaris. Navigate through it and find information about my skills, myself and more."/>
-    <meta property="og:image" content="https://0.academia-photos.com/15196096/4099345/4778952/s200_konstantinos.tsafaris.jpg"/>
+    <meta property="og:description"
+          content="This is the personal website of web developer Konstantinos (Kostis or Kostas) Tsafaris. Navigate through it and find information about my skills, myself and more."/>
+    <meta property="og:image"
+          content="https://0.academia-photos.com/15196096/4099345/4778952/s200_konstantinos.tsafaris.jpg"/>
     <meta property="og:url" content="http://www.tsafaris.com/">
     <meta property="og:type" content="website"/>
     <!--END Open Graph tags-->
@@ -58,15 +61,15 @@
     <meta name="theme-color" content="#ffffff">
     <!--END-->
 
+    <!-- build:css css/main.css -->
+    <link rel="stylesheet" href="/kostisWebsite/app-src/css/app.css">
+    <link rel="stylesheet" href="/kostisWebsite/app-src/assets/animate/animate.css">
+    <!--endbuild-->
+
     <!-- build:css css/vendor.css -->
     <link rel="stylesheet" href="/kostisWebsite/bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="/kostisWebsite/bower_components/components-font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/kostisWebsite/bower_components/angular-typewrite/dist/angular-typewrite.css">
-    <!--endbuild-->
-
-    <!-- build:css css/main.css -->
-    <link rel="stylesheet" href="/kostisWebsite/app-src/css/app.css">
-    <link rel="stylesheet" href="/kostisWebsite/app-src/assets/animate/animate.css">
     <!--endbuild-->
 
     <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>  <!--for google maps-->
@@ -75,13 +78,16 @@
     <script src="/kostisWebsite/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/kostisWebsite/bower_components/angular/angular.min.js"></script>
     <!--endbuild-->
+
 </head>
 
-<body ng-controller="mainController as mainCtrl" ng-cloak>
+<body>
+<div ng-if="!appReady" class="full-window">
+    <div class='loader'>Loading...</div>
+    <p class="loader-text">LOADING</p>
+</div>
 
-<div ng-if="mainCtrl.loading">LOADER</div>
-
-<div ng-if="!mainCtrl.loading" layout="row" class="docs-body">
+<div ng-if="appReady" ng-controller="mainController as mainCtrl" layout="row" class="docs-body" ng-cloak>
     <md-sidenav class="md-sidenav-left"
                 md-component-id="left"
                 md-whiteframe="4">
@@ -116,7 +122,8 @@
                             layout-align="center">
                     <div layout="row" layout-align="space-between center">
                         <div flex>
-                            <md-button ng-click="mainCtrl.openSidebar()" aria-label="Open menu" ng-hide="$mdMedia('gt-xs')">
+                            <md-button ng-click="mainCtrl.openSidebar()" aria-label="Open menu"
+                                       ng-hide="$mdMedia('gt-xs')">
                                 <ng-md-icon icon="menu" style="fill: white"></ng-md-icon>
                             </md-button>
                         </div>
@@ -181,8 +188,8 @@
                 <div flex></div>
                 <div flex layout="column" layout-align="center center"
                      style="background-color: rgba(0,0,0,0.5); padding: 4% 20%;">
-                    <h2 class="md-headline">About me</h2>
-                    <p ng-class="{'no-margin-top': $mdMedia('xs')}">{{mainCtrl.author.desc}}</p>
+                    <h2 class="md-headline">About</h2>
+                    <p ng-class="{'no-margin-top': $mdMedia('xs')}" class="text-justify">{{mainCtrl.author.desc}}</p>
                 </div>
                 <div flex layout="column" layout-align="end center" style="padding-bottom: 0;">
                     <md-button class="start-btn md-accent" ng-click="mainCtrl.scrollTo('skills')"
@@ -195,9 +202,9 @@
 
         <section>
             <div id="skills" class="background-main3" in-view="mainCtrl.skillsInView($inview, $event)" layout="column"
-                 layout-align="space-between" layout-padding>
+                 layout-align="center" layout-padding>
 
-                <h2 class="md-headline" layout="row" layout-align="center">My Skills</h2>
+                <h2 class="md-headline" layout="row" layout-align="center">Skills</h2>
 
                 <div ng-show="mainCtrl.showSkills" layout="row" layout-xs="column">
 
@@ -209,7 +216,7 @@
                             </div>
                             <div flex-offset="5" layout="column">
                                 <span>{{skill.title}}</span>
-                                <!--<span>{{skill.description}}</span>-->
+                                <span ng-if="skill.description.length>0">{{skill.description}}</span>
                             </div>
                         </div>
                     </div>
@@ -222,15 +229,38 @@
                             </div>
                             <div flex-offset="5" layout="column">
                                 <span>{{skill.title}}</span>
-                                <!--<span>{{skill.description}}</span>-->
+                                <span ng-if="skill.description.length>0">{{skill.description}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div layout="row" layout-align="center center">
-                    <a class="md-warn" target="_self" href="cv.pdf" download="k_Tsafaris-CV.pdf">*Download CV</a>
-                </div>
+                <!--<div layout="row" layout-align="center center">-->
+                <!--<a class="md-warn" target="_self" href="cv.pdf" download="k_Tsafaris-CV.pdf">*Download CV</a>-->
+                <!--</div>-->
+            </div>
+        </section>
+
+        <section>
+            <div id="projects" class="background-main5" layout="column"
+                 layout-align="center" layout-padding>
+
+                <h2 class="md-headline" layout="row" layout-align="center">Projects</h2>
+
+                <md-grid-list
+                        md-cols-xs="1" md-cols-sm="3" md-cols-md="3" md-cols-gt-md="3"
+                        md-row-height-gt-md="1:1" md-row-height="1:1"
+                        md-gutter="12px" md-gutter-gt-sm="30px">
+
+                    <md-grid-tile ng-repeat="project in mainCtrl.projects track by $index">
+                        <a ng-href="{{project.url}}" target="_blank" ng-mouseenter="active=true" ng-mouseleave="active=false"
+                           ng-class="active ? 'active-logo' : 'logo'">
+                            <img ng-src="assets/img/otherProjects/{{project.name}}.jpg"/>
+                        </a>
+                    </md-grid-tile>
+
+                </md-grid-list>
+
             </div>
         </section>
 
@@ -248,7 +278,8 @@
 
                 <div ng-if="mainCtrl.contact" layout="column" layout-padding>
                     <div layout="row" layout-align="center center">
-                        <md-button class="md-mini md-icon md-fab md-accent" ng-click="mainCtrl.contact =! mainCtrl.contact"
+                        <md-button class="md-mini md-icon md-fab md-accent"
+                                   ng-click="mainCtrl.contact =! mainCtrl.contact"
                                    aria-label="Toggle map">
                             <i class="fa fa-lg fa-arrow-up" aria-hidden="true"></i>
                         </md-button>
@@ -267,7 +298,8 @@
                                 <md-input-container>
                                     <label for="name">Your name</label>
                                     <input ng-model="mainCtrl.user.name" id="name" name="name" required>
-                                    <div ng-messages="mainCtrl.contactForm.name.$error" ng-if="mainCtrl.contactForm.name.$touched" class="error-messages"
+                                    <div ng-messages="mainCtrl.contactForm.name.$error"
+                                         ng-if="mainCtrl.contactForm.name.$touched" class="error-messages"
                                          role="alert">
                                         <div ng-message="required">*Please enter your name.</div>
                                     </div>
@@ -275,8 +307,10 @@
 
                                 <md-input-container>
                                     <label for="email">Your e-mail (so that I can get back to you)</label>
-                                    <input ng-model="mainCtrl.user.email" id="email" name="_replyto" type="email" required>
-                                    <div ng-messages="mainCtrl.contactForm._replyto.$error" ng-if="mainCtrl.contactForm._replyto.$touched" class="error-messages"
+                                    <input ng-model="mainCtrl.user.email" id="email" name="_replyto" type="email"
+                                           required>
+                                    <div ng-messages="mainCtrl.contactForm._replyto.$error"
+                                         ng-if="mainCtrl.contactForm._replyto.$touched" class="error-messages"
                                          role="alert">
                                         <div ng-message="email">*Please enter a valid e-mail address.</div>
                                         <div ng-message="required">*Please enter your e-mail address.</div>
@@ -288,10 +322,12 @@
                                 <textarea ng-model="mainCtrl.user.message" id="message" name="message"
                                           ng-maxlength="150" rows="5"
                                           md-select-on-focus required></textarea>
-                                    <div ng-messages="mainCtrl.contactForm.message.$error" ng-if="mainCtrl.contactForm.message.$touched" class="error-messages"
+                                    <div ng-messages="mainCtrl.contactForm.message.$error"
+                                         ng-if="mainCtrl.contactForm.message.$touched" class="error-messages"
                                          role="alert">
                                         <div ng-message="required">*Please enter your message.</div>
-                                        <div ng-message="maxlength">*Your message is too long (max 150 chars allowed).</div>
+                                        <div ng-message="maxlength">*Your message is too long (max 150 chars allowed).
+                                        </div>
                                     </div>
                                 </md-input-container>
 
@@ -299,16 +335,24 @@
                                 <input type="text" name="_gotcha" style="display:none"/>
 
                                 <!--<md-button type="submit" class="md-accent md-raised"-->
-                                           <!--ng-click="mainCtrl.showSendMessage($event);"-->
+                                <!--ng-click="mainCtrl.showSendMessage($event);"-->
                                 <!--&gt;Send-->
                                 <!--</md-button>-->
                                 <md-button type="submit" class="md-accent md-raised"
-                                           ng-click="mainCtrl.sendEmail();"
-                                >Send
+                                           ng-click="mainCtrl.sendEmail();">
+                                    <span ng-show="mainCtrl.sendingMail == true"><i class="fa fa-circle-o-notch fa-spin"
+                                                                                    aria-hidden="true"></i></span>
+                                    Send
                                 </md-button>
 
-                                <div ng-if="mainCtrl.messageSent" class="message-success" layout-padding>Your message was sent successfully.</div>
-                                <div ng-if="mainCtrl.errorMessage" class="error-messages" layout-padding>Some error occurred (probably not your fault). Please e-mail me at <pre>dinos1@hotmail.com</pre>.</div>
+                                <div ng-if="mainCtrl.messageSent" class="message-success" layout-padding>Your message
+                                    was sent successfully.
+                                </div>
+                                <div ng-if="mainCtrl.errorMessage" class="error-messages" layout-padding>Some error
+                                    occurred (probably not your fault). Please e-mail me at
+                                    <pre>dinos1@hotmail.com</pre>
+                                    .
+                                </div>
 
                             </form>
 
@@ -350,10 +394,17 @@
 <!--endbuild-->
 
 <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', 'UA-83159331-1', 'auto');
     ga('send', 'pageview');

@@ -363,7 +363,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= yeoman.dist %>',
-                    src: ['*.html', 'layout/{,*/}*.html', 'layout/tmpl/{,*/}*.html'],
+                    src: ['*.html', 'components/**/*.html'],
                     dest: '<%= yeoman.dist %>'
                 }]
             }
@@ -604,7 +604,7 @@ module.exports = function (grunt) {
         'filerev',
         'usemin',
         // 'useminGuest'
-        // 'htmlmin'
+        'htmlmin'
     ]);
 
     grunt.registerTask('default', [

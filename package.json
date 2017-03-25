@@ -14,7 +14,7 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "*",
     "grunt-contrib-cssmin": "^1.0.2",
-    "grunt-contrib-htmlmin": "*",
+    "grunt-contrib-htmlmin": "^2.0.0",
     "grunt-contrib-imagemin": "*",
     "grunt-contrib-jshint": "*",
     "grunt-contrib-sass": "*",
