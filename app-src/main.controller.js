@@ -51,7 +51,7 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     ];
     vm.author = {
         "name": "Kostis Tsafaris",
-        "desc": "Kostis Tsafaris is a Web Developer with a background in Physics and Renewable Energy. What drives him forward, is his passion for coding and new technologies. Feel free to navigate through the website and don't forget to visit the social media pages. If you want to ask a question or just make a comment, use the contact form at the bottom of the page - he is always happy to respond!",
+        "desc": "Hello! My name is Kostis Tsafaris and I am a Web Developer. What drives me forward, is my passion for coding and new technologies. Feel free to navigate through my website and don't forget to visit my social media pages. If you want to ask a question or just say 'Hi!', use the contact form at the bottom of the page - I am always happy to respond!",
         "avatar": "assets/img/face-outline.png"
     };
     vm.menuItems = [
@@ -80,39 +80,49 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
     vm.skills1 = [
         {
             title: "HTML5",
-            description: "",
+            description: "HTML 5 is a revision of the Hypertext Markup Language (HTML), the standard programming language for describing the contents and appearance of Web pages.",
             icon: "fa-html5"
         },
         {
             title: "CSS3",
-            description: "",
+            description: "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language.",
             icon: "fa-css3"
         },
         {
             title: "AngularJS",
-            description: "ZK",
+            description: "AngularJS is a structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly. AngularJS's data binding and dependency injection eliminate much of the code you would otherwise have to write. And it all happens within the browser, making it an ideal partner with any server technology.",
+            icon: "fa-desktop"
+        },
+        {
+            title: "ZK",
+            description: "ZK is a UI framework that enables you to build amazing web and mobile applications without having to learn JavaScript or AJAX.",
             icon: "fa-desktop"
         },
         {
             title: "Photoshop",
-            description: "",
+            description: "Adobe Photoshop is the predominant photo editing and manipulation software on the market. Its uses range from full featured editing of large batches of photos to creating intricate digital paintings and drawings that mimic those done by hand.",
             icon: "fa-picture-o"
         }
     ];
     vm.skills2 = [
         {
             title: "T-SQL",
-            description: "",
+            description: "T-SQL (Transact-SQL) is a set of programming extensions from Sybase and Microsoft that add several features to the Structured Query Language (SQL), including transaction control, exception and error handling, row processing and declared variables.",
             icon: "fa-database"
         },
         {
             title: "PHP",
-            description: "Java",
+            description: "PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML.",
+            icon: "fa-terminal"
+        },
+        {
+            title: "Java",
+            description: "Java is a programming language and computing platform first released by Sun Microsystems in 1995. There are lots of applications and websites that will not work unless you have Java installed, and more are created every day. Java is fast, secure, and reliable. From laptops to datacenters, game consoles to scientific supercomputers, cell phones to the Internet, Java is everywhere!",
             icon: "fa-terminal"
         },
         {
             title: "Javascript",
-            description: "",
+            description: "JavaScript is a programming language that allows you to implement complex things on web pages — every time a web page does more than just sit there and display static information for you to look at — displaying timely content updates, or interactive maps, or animated 2D/3D graphics, or scrolling video jukeboxes, etc. — you can bet that JavaScript is probably involved.",
             icon: "fa-code"
         },
         // {
@@ -122,7 +132,7 @@ function mainController($scope, $mdSidenav, $http, $timeout, $interval, $locatio
         // },
         {
             title: "Repo",
-            description: "",
+            description: "Git is a version control system for tracking changes in computer files and coordinating work on those files among multiple people. It is primarily used for source code management in software development, but it can be used to keep track of changes in any set of files. As a distributed revision control system it is aimed at speed, data integrity, and support for distributed, non-linear workflows.",
             icon: "fa-git"
         }
     ];

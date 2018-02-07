@@ -352,3 +352,25 @@ md-grid-tile a img {
         padding-bottom: 0;
     }
 }
+
+md-tooltip.custom-tooltip {
+    height: auto !important;
+    width: 25%;
+    border-radius: 0;
+    color: black;
+
+}
+
+md-tooltip.custom-tooltip .md-content {
+    height: auto !important;
+    white-space: normal;
+    padding: 12px;
+    background-color: rgb(255, 194, 8);
+    font-size: 1.4em;
+    text-align: justify;
+    word-wrap: break-word;
+}
+
+#skills i:hover {
+    cursor: pointer;
+}
