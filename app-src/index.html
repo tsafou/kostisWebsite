@@ -75,8 +75,8 @@
     <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js"></script>  <!--for google maps-->
 
     <!-- build:nominjs js/vendorPre.js -->
-    <script src="/kostisWebsite/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/kostisWebsite/bower_components/angular/angular.min.js"></script>
+    <script src="/kostisWebsite/bower_components/jquery/dist/jquery.min.js"></script>
     <!--endbuild-->
 
 </head>
@@ -156,8 +156,9 @@
                 <pre class="typewrite" typewrite start="mainCtrl.startTyping" blink-cursor="false"
                      text="'Kostis Tsafaris'" initial-delay="0s" type-delay="150"></pre>
                         <br/>
-                <pre class="typewrite" typewrite start="mainCtrl.startTyping" text="'Web Developer'" initial-delay="3s"
-                     type-delay="100" blink-delay="350" callback-fn="mainCtrl.showStart();"></pre>
+                        <pre class="typewrite" typewrite start="mainCtrl.startTyping" text="'Web Developer'"
+                             initial-delay="3s"
+                             type-delay="100" blink-delay="350" callback-fn="mainCtrl.showStart();"></pre>
                         <br/>
                     </h1>
 
@@ -207,30 +208,25 @@
                 <h2 class="md-headline" layout="row" layout-align="center">Skills</h2>
 
                 <div ng-show="mainCtrl.showSkills" layout="row" layout-xs="column">
-
                     <div flex layout="column">
-                        <div ng-repeat="skill in mainCtrl.skills1" layout="row" layout-align="start center"
+                        <div ng-repeat="skill in mainCtrl.skills1" layout="column" layout-align="center center"
                              layout-padding>
-                            <div flex-offset="10">
-                                <i class="fa fa-3x fa-fw {{skill.icon}}" aria-hidden="true"></i>
-                            </div>
-                            <div flex-offset="5" layout="column">
-                                <span>{{skill.title}}</span>
-                                <span ng-if="skill.description.length>0">{{skill.description}}</span>
-                            </div>
+                            <i class="fa fa-3x fa-fw {{skill.icon}}" aria-hidden="true">
+                                <md-tooltip md-direction="right" class="custom-tooltip">{{skill.description}}</md-tooltip>
+                            </i>
+                            <span>{{skill.title}}</span>
+                            <!--<span ng-if="skill.description.length>0">{{skill.description}}</span>-->
                         </div>
                     </div>
 
                     <div flex layout="column">
-                        <div flex ng-repeat="skill in mainCtrl.skills2" layout="row" layout-align="start center"
+                        <div flex ng-repeat="skill in mainCtrl.skills2" layout="column" layout-align="center center"
                              layout-padding>
-                            <div flex-offset="10">
-                                <i class="fa fa-3x fa-fw {{skill.icon}}" aria-hidden="true"></i>
-                            </div>
-                            <div flex-offset="5" layout="column">
-                                <span>{{skill.title}}</span>
-                                <span ng-if="skill.description.length>0">{{skill.description}}</span>
-                            </div>
+                            <i class="fa fa-3x fa-fw {{skill.icon}}" aria-hidden="true">
+                                <md-tooltip md-direction="left" class="custom-tooltip">{{skill.description}}</md-tooltip>
+                            </i>
+                            <span>{{skill.title}}</span>
+                            <!--<span ng-if="skill.description.length>0">{{skill.description}}</span>-->
                         </div>
                     </div>
                 </div>
@@ -253,7 +249,8 @@
                         md-gutter="12px" md-gutter-gt-sm="30px">
 
                     <md-grid-tile ng-repeat="project in mainCtrl.projects track by $index">
-                        <a ng-href="{{project.url}}" target="_blank" ng-mouseenter="active=true" ng-mouseleave="active=false"
+                        <a ng-href="{{project.url}}" target="_blank" ng-mouseenter="active=true"
+                           ng-mouseleave="active=false"
                            ng-class="active ? 'active-logo' : 'logo'">
                             <img ng-src="assets/img/otherProjects/{{project.name}}.jpg"/>
                         </a>
@@ -319,9 +316,9 @@
 
                                 <md-input-container class="md-block">
                                     <label for="message">Your message</label>
-                                <textarea ng-model="mainCtrl.user.message" id="message" name="message"
-                                          ng-maxlength="150" rows="5"
-                                          md-select-on-focus required></textarea>
+                                    <textarea ng-model="mainCtrl.user.message" id="message" name="message"
+                                              ng-maxlength="150" rows="5"
+                                              md-select-on-focus required></textarea>
                                     <div ng-messages="mainCtrl.contactForm.message.$error"
                                          ng-if="mainCtrl.contactForm.message.$touched" class="error-messages"
                                          role="alert">
@@ -397,10 +394,10 @@
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
         a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
+            m = s.getElementsByTagName(o)[0];
         a.async = 1;
         a.src = g;
         m.parentNode.insertBefore(a, m)
