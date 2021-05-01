@@ -326,6 +326,10 @@ ul {
     opacity: 1;
 }
 
+a:visited {
+    color: inherit;
+}
+
 md-grid-tile a img {
     height: 90%;
     width: 100%;
